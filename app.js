@@ -60,7 +60,7 @@ const Stream = require('stream').Transform;
             response.on('end', function () {
               const fileName = titleText.replace(/[/\\?%*:|"<>]/g, '-');
               fs.appendFileSync('./done.txt', `${site}\n`);
-              fs.writeFileSync(`./images/${fileName}.png`, data.read());
+              fs.writeFileSync(`./images/${fileName}${gfg()}.png`, data.read());
 
               console.log('success:', success);
               success += 1;
@@ -82,4 +82,10 @@ const Stream = require('stream').Transform;
 
 function timeout(ms = 2000) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function gfg() {
+  var minm = 100;
+  var maxm = 999;
+  return Math.floor(Math.random() * (maxm - minm + 1)) + minm;
 }
