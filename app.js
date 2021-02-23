@@ -48,9 +48,13 @@ const Stream = require('stream').Transform;
 
         const title = await driver.findElement(By.id('productTitle'));
         const titleText = await (await title.getText()).trim();
-
+        console.log(urlImage);
+        const urlImageLink = decodeURIComponent(urlImage);
+        const matchUrl = urlImageLink.match(/\/(.*?)\|(.*?)\|(.*?)\|/);
+        const logoPath = matchUrl[3];
+        const urlLogo = `https://m.media-amazon.com/images/I/${logoPath}`;
         https
-          .request(urlImage, function (response) {
+          .request(urlLogo, function (response) {
             const data = new Stream();
 
             response.on('data', function (chunk) {
